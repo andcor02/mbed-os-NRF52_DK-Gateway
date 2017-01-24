@@ -17,8 +17,6 @@
 #ifndef __BLE_BUTTON_SERVICE_H__
 #define __BLE_BUTTON_SERVICE_H__
 
-Serial pc(USBTX,USBRX);
-
 class ButtonService {
 public:
     const static uint16_t BUTTON_SERVICE_UUID              = 0xA000;
@@ -35,7 +33,6 @@ public:
     void updateButtonState(bool newState) {
         if (newState) {
         *counter=(*counter)+1;
-        pc.printf("%d", *counter);
         ble.gattServer().write(buttonState.getValueHandle(), (uint8_t *)counter, sizeof(uint16_t));
         }
     }
